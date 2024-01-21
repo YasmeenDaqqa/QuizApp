@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizapp/models/question_with_answer.dart';
 import 'package:quizapp/utils/app_colors.dart';
 
+
 class AnswerWidgetItem extends StatelessWidget {
   final Answer answer;
   final String? selectedAnswer;
@@ -22,7 +23,7 @@ class AnswerWidgetItem extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: selectedAnswer == answer.text
-                ? AppColors.green
+                ? AppColors.deepPurple
                 : AppColors.white,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(

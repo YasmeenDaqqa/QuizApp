@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizapp/utils/app_colors.dart';
+
 class MainButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;

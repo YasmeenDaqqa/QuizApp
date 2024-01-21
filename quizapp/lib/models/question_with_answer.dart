@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class QuestionWithAnswer {
   final String question;
   final List<Answer> answers;
-  final String correctAnswer;
+final String correctAnswer;
 
   QuestionWithAnswer({
     required this.question,
@@ -15,97 +15,114 @@ class QuestionWithAnswer {
 class Answer {
   final String text;
   final IconData icon;
+  bool isCorrect;
 
-  Answer({required this.text, required this.icon});
+  Answer({required this.text, required this.icon, required this.isCorrect});
 }
 
 List<QuestionWithAnswer> questionsWithAnswers = [
   QuestionWithAnswer(
-    question: 'What\'s your favorite color?',
+    question: 'What\'s your favorite season?',
     answers: [
       Answer(
-        text: 'Red',
+        text: 'summer',
         icon: Icons.circle,
+        isCorrect: false,
       ),
       Answer(
-        text: 'Green',
-        icon: Icons.square,
+        text: 'spring',
+        icon: Icons.circle,
+        isCorrect: true,
       ),
       Answer(
-        text: 'Yellow',
-        icon: Icons.star,
+        text: 'winter',
+        icon: Icons.circle,
+        isCorrect: false,
       ),
       Answer(
-        text: 'Blue',
-        icon: Icons.train,
+        text: 'autumn',
+        icon: Icons.circle,
+        isCorrect: false,
       ),
     ],
-    correctAnswer: 'Red',
+    correctAnswer: 'spring',
   ),
   QuestionWithAnswer(
-    question: 'What\'s your favorite animal?',
+    question: 'What\'s your favorite hobby?',
     answers: [
       Answer(
-        text: 'Rabbit',
-        icon: Icons.add,
+        text: 'Reading',
+        icon: Icons.circle,
+        isCorrect: false,
       ),
       Answer(
-        text: 'Snake',
-        icon: Icons.remove,
+        text: 'writing',
+        icon: Icons.circle,
+        isCorrect: false,
       ),
       Answer(
-        text: 'Elephant',
-        icon: Icons.face,
+        text: 'programming',
+        icon: Icons.circle,
+        isCorrect: true,
       ),
       Answer(
-        text: 'Lion',
-        icon: Icons.access_alarm,
+        text: 'swimming',
+        icon: Icons.circle,
+        isCorrect: false,
       ),
     ],
-    correctAnswer: 'Elephant',
+    correctAnswer: 'programming',
   ),
   QuestionWithAnswer(
-    question: 'Who\'s your favorite instructor?',
+    question: 'Who\'s your favorite country?',
     answers: [
       Answer(
-        text: 'Tarek',
-        icon: Icons.add,
+        text: 'Palestine',
+        icon: Icons.circle,
+        isCorrect: true,
       ),
       Answer(
-        text: 'Tarekk',
-        icon: Icons.reorder_sharp,
+        text: 'Jordan ',
+        icon: Icons.circle,
+        isCorrect: false,
       ),
       Answer(
-        text: 'Tarekkk',
-        icon: Icons.face,
+        text: 'Türkiye',
+        icon: Icons.circle,
+        isCorrect: false,
       ),
       Answer(
-        text: 'Tarekkkk',
-        icon: Icons.access_alarm,
+        text: 'Syria',
+        icon: Icons.circle,
+        isCorrect: false,
       ),
     ],
-    correctAnswer: 'Tarek',
+    correctAnswer: 'Palestine',
   ),
   QuestionWithAnswer(
     question: 'What\'s your favorite food?',
     answers: [
       Answer(
-        text: 'Koshary',
-        icon: Icons.food_bank,
+        text: 'Shawarma',
+        icon: Icons.circle,
+        isCorrect: true,
       ),
       Answer(
         text: 'Pizza',
-        icon: Icons.local_pizza,
+        icon: Icons.circle,
+        isCorrect: false,
       ),
       Answer(
         text: 'Pasta',
-        icon: Icons.local_activity,
+        icon: Icons.circle,
+        isCorrect: false,
       ),
       Answer(
         text: 'Burger',
-        icon: Icons.fastfood,
+        icon: Icons.circle,
+        isCorrect: false,
       ),
     ],
-    correctAnswer: 'Koshary',
+    correctAnswer: 'Shawarma',
   ),
 ];
