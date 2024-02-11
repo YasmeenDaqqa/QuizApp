@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                     onTap: () => Navigator.of(context)
                         .pushNamed(
                           AppRoutes.productDetails,
-                          arguments: dummyProduct,
+                         // arguments: dummyProduct,
                         )
                         .then((value) => setState(() {})),
                     child: ProductItem(product: dummyProduct),

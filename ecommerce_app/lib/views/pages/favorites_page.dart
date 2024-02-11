@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/models/product.dart';
-import 'package:food_delivery_app/utils/app_routes.dart';
-
-
+import 'package:ecommerce_app/models/product_item_model.dart';
+import 'package:ecommerce_app/utils/route/app_routes.dart';
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
 
@@ -29,8 +27,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
-                onTap: () {
-                  Navigator.of(context).pushNamed(
+               onTap: () {
+         Navigator.of(context).pushNamed(
                     AppRoutes.productDetails,
                     arguments: favProducts[index],
                   ).then((value) => setState(() {}));
@@ -48,28 +46,28 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       ),
                 ),
                 subtitle: Text(
-                  '${favProducts[index].category.title} - \$${favProducts[index].price}',
+                  '${favProducts[index].category} - \$${favProducts[index].price}',
                   style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         fontWeight: FontWeight.normal,
                       ),
                 ),
-                trailing: orientation == Orientation.portrait ? IconButton(
-                  onPressed: () {
-                    setState(() {
+               trailing: orientation == Orientation.portrait ? IconButton(
+                onPressed: () {
+                   setState(() {
                       favProducts.remove(favProducts[index]);
                     });
-                  },
-                  icon: const Icon(Icons.favorite),
+                },
+                icon: const Icon(Icons.favorite),
                   color: Theme.of(context).primaryColor,
                 ) : TextButton.icon(
-                  onPressed: () {
-                    setState(() {
-                      favProducts.remove(favProducts[index]);
-                    });
-                  },
-                  icon: const Icon(Icons.favorite),
-                  label: const Text('Favorite'),
-                ),
+                 onPressed: () {
+                   setState(() {
+                     favProducts.remove(favProducts[index]);
+                  });
+                },
+                 icon: const Icon(Icons.favorite),
+                 label: const Text('Favorite'),
+               ),
               ),
             ),
           );
