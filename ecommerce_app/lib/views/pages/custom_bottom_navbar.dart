@@ -5,18 +5,11 @@ import 'package:ecommerce_app/views/pages/favorites_page.dart';
 import 'package:ecommerce_app/views/pages/home_page.dart';
 import 'package:ecommerce_app/views/pages/profle_page.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_app/views/widgets/SearchPage.dart';
-import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-import 'package:ecommerce_app/models/product_item_model.dart';
-// import 'package:ecommerce_app/views/widgets/searchPage.dart';
+import 'package:ecommerce_app/views/widgets/SearchPage.dart';
 
 class CustomBottomNavbar extends StatefulWidget {
-
-  const CustomBottomNavbar({
-    super.key,
-    
-  });
+  const CustomBottomNavbar({super.key});
 
   @override
   State<CustomBottomNavbar> createState() => _CustomBottomNavbarState();
@@ -88,7 +81,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Hi, Yasmeen',
+              'Hi, Tarek',
               style: Theme.of(context).textTheme.labelLarge!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -103,12 +96,10 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-    Navigator.push(
+            onPressed: () {   Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SearchPage()),
-    );
-  },
+    );},
             icon: const Icon(Icons.search),
           ),
           IconButton(

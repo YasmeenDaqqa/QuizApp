@@ -25,7 +25,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: AppColors.orage,
+        backgroundColor: AppColors.transparent,
         actions: [
           IconButton(
             onPressed: () {},
@@ -82,7 +82,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                               children: [
                                 const Icon(
                                   Icons.star,
-                                  color: AppColors.orage,
+                                  color: AppColors.orange,
                                 ),
                                 const SizedBox(width: 6),
                                 Text(
