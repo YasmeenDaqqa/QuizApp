@@ -29,7 +29,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
       HomePage(),
       FavoritesPage(),
       CartPage(),
-      ProfilePage(),
+      ProfilePage1(),
     ];
   }
 

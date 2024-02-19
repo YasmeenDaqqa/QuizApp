@@ -1,38 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/models/product_item_model.dart';
 import 'package:ecommerce_app/utils/route/app_routes.dart';
-class FavoritesPage extends StatefulWidget {
+import 'package:ecommerce_app/view_models/favorites_page/favorite_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+class FavoritesPage extends StatelessWidget {
   const FavoritesPage({super.key});
 
-  @override
-  State<FavoritesPage> createState() => _FavoritesPageState();
-}
-
-class _FavoritesPageState extends State<FavoritesPage> {
-  @override
+ @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => FavoriteCubit()..getFavoriteData(),
+      child: BlocBuilder<FavoriteCubit, FavoriteState>(
+        builder: (context, state) {
+          if (state is FavoriteLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is FavoriteError) {
+            return Center(
+              child: Text(state.message),
+            );
+          } else if (state is FavoriteLoaded) {
+            final categories = state.favorite;
+        
     final orientation = MediaQuery.of(context).orientation;
     debugPrint('FavoritesPage build()');
 
-    if (favProducts.isEmpty) {
-      return const Center(
-        child: Text('No Favorite Products!'),
-      );
-    }
+   if (favProducts.isEmpty) {
+     return const Center(
+       child: Text('No Favorite Products!'),
+     );
+   }
 
-    return ListView.builder(
+  return ListView.builder(
         itemCount: favProducts.length,
         itemBuilder: (context, index) {
           return Card(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListTile(
-               onTap: () {
-         Navigator.of(context).pushNamed(
-                    AppRoutes.productDetails,
-                    arguments: favProducts[index],
-                  ).then((value) => setState(() {}));
-                },
+             //  onTap: () {
+       //  Navigator.of(context).pushNamed(
+                //    AppRoutes.productDetails,
+                //    arguments: favProducts[index],
+               //   ).then((value) => setState(() {}));
+               // },
                 leading: Image.network(
                   favProducts[index].imgUrl,
                   height: 100,
@@ -53,17 +65,17 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 ),
                trailing: orientation == Orientation.portrait ? IconButton(
                 onPressed: () {
-                   setState(() {
+                 //  setState(() {
                       favProducts.remove(favProducts[index]);
-                    });
+                  //  });
                 },
                 icon: const Icon(Icons.favorite),
                   color: Theme.of(context).primaryColor,
                 ) : TextButton.icon(
-                 onPressed: () {
-                   setState(() {
-                     favProducts.remove(favProducts[index]);
-                  });
+                onPressed: () {
+               //  setState(() {
+                    favProducts.remove(favProducts[index]);
+              //  });
                 },
                  icon: const Icon(Icons.favorite),
                  label: const Text('Favorite'),
@@ -72,5 +84,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
             ),
           );
         });
+
   }
+    else {
+            return const SizedBox();
+          }
+        }));
+        }
 }
