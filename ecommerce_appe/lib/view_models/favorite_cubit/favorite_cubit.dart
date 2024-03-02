@@ -1,7 +1,7 @@
 import 'package:ecommerce_appe/models/announcement_model.dart';
 import 'package:ecommerce_appe/models/product_item_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:ecommerce_appe/models/fav_Products_model.dart';
 part 'favorite_state.dart';
 
 class FavoriteCubit extends Cubit<FavoriteState> {

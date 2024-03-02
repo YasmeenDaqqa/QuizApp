@@ -16,3 +16,12 @@ final class HomeError extends HomeState {
   final String message;
   HomeError(this.message);
 }
+final class AddingToFavorites extends HomeState {}
+
+final class AddedToFavorites extends HomeState {}
+
+final class AddToFavoritesError extends HomeState{
+  final String message;
+
+  AddToFavoritesError(this.message);
+}

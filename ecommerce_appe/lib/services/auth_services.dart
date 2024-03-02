@@ -1,4 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ecommerce_appe/services/firestore_service.dart';
+import 'package:ecommerce_appe/utils/api_paths.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthServices {
   Future<bool> signInWithEmailAndPassword(String email, String password);
@@ -10,6 +13,7 @@ abstract class AuthServices {
 class AuthServicesImpl implements AuthServices {
   // Singleton Design Pattern
   final firebaseAuth = FirebaseAuth.instance;
+  final firestoreServices = FirestoreService.instance;
 
   @override
   Future<bool> signInWithEmailAndPassword(String email, String password) async {
@@ -37,6 +41,13 @@ class AuthServicesImpl implements AuthServices {
     );
     User? user = userCredential.user;
     if (user != null) {
+      await firestoreServices.setData(path: ApiPaths.user(user.uid), data: {
+        'uid': user.uid,
+        'email': user.email,
+        'name': user.displayName,
+        'phone': user.phoneNumber,
+        'photoUrl': user.photoURL,
+      });
       return true;
     }
     return false;

@@ -14,7 +14,7 @@ class PofileervicesImpl extends PofileServices {
   @override
   Future<List<usersModel>> getProducts() async =>
       await firestoreService.getCollection<usersModel>(
-        path: ApiPaths.users(),
+        path: ApiPaths.userrs(),
         builder: (data, documentId) =>
             usersModel.fromMap(data, documentId),
       );

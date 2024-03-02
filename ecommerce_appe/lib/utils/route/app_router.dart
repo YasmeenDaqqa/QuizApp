@@ -5,7 +5,15 @@ import 'package:ecommerce_appe/views/pages/custom_bottom_navbar.dart';
 import 'package:ecommerce_appe/views/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ecommerce_appe/view_models/product_details_cubit.dart/product_details_cubit.dart';
 import 'package:ecommerce_appe/views/pages/login_page.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ecommerce_appe/models/product_item_model.dart';
+import 'package:ecommerce_appe/utils/route/app_routes.dart';
+import 'package:ecommerce_appe/view_models/checkout_cubit/checkout_cubit.dart';
+
+import 'package:ecommerce_appe/views/pages/checkout_page.dart';
 class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -30,6 +38,18 @@ class AppRouter {
       case AppRoutes.homeLogin:
         return MaterialPageRoute(
           builder: (_) => const LoginPage(),
+          settings: settings,
+        );
+      case AppRoutes.checkoutRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) {
+              final cubit = CheckoutCubit();
+              cubit.getCheckoutPage();
+              return cubit;
+            },
+            child: const CheckoutPage(),
+          ),
           settings: settings,
         );
       default:
