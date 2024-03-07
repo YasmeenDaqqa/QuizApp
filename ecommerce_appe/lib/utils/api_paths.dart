@@ -13,7 +13,7 @@ class ApiPaths {
   static String cartItems(String uid) => 'users/$uid/cartItems/';
   static String addresses(String uid) => 'users/$uid/addresses/';
   static String paymentMethods(String uid) => 'users/$uid/paymentMethods/';
-   static String fav(String uid, String favId) =>
-    'users/$uid/favs/$favId';
-    static String favs(String uid) => 'users/$uid/favs/';
+  static String fav(String uid, String favId) =>
+   'users/$uid/favorites/$favId';
+ static String favs(String uid) => 'users/$uid/favorites/';
 }

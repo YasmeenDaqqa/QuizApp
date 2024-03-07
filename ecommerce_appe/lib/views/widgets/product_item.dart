@@ -2,11 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_appe/models/product_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_appe/utils/app_colors.dart';
+import 'package:ecommerce_appe/models/fav_Products_model.dart';
+import 'package:ecommerce_appe/view_models/home_cubit/home_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 class ProductItem extends  StatefulWidget {
    final ProductItemModel productItem;
+   
   const ProductItem({
     super.key,
     required this.productItem,
+
   });
 
   @override
@@ -46,13 +51,14 @@ class _ProductItemState extends State<ProductItem> {
               right: 8.0,
               child: InkWell(
               onTap: () {
-                setState(() {
-                  if (favProducts.contains(widget.productItem)) {
-                    favProducts.remove(widget.productItem);
-                  } else {
-                    favProducts.add(widget.productItem);
-                  }
-                });
+              //  setState(() {
+                //  if (favProducts.contains(widget.productItem)) {
+                ////    favProducts.remove(widget.productItem);
+                //  } else {
+                   // favProducts.add(widget.productItem);
+                  //}
+                //});
+                 BlocProvider.of<HomeCubit>(context).addToFavorites(widget.productItem);
               },
               child: DecoratedBox(
                 decoration: const BoxDecoration(

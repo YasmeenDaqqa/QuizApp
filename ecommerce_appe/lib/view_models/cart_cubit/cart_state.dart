@@ -21,6 +21,11 @@ final class QuantityCounterLoaded extends CartState {
     required this.cartOrder,
   });
 }
+final class CartDeleted extends CartState {
+   final String cartOrderId;
+
+  CartDeleted({required this.cartOrderId});
+}
 
 final class QuantityCounterError extends CartState {
   final String message;

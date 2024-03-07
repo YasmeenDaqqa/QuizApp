@@ -23,4 +23,8 @@ class CartServicesImpl implements CartServices {
         path: ApiPaths.cartItem(uid, cartOrder.id),
         data: cartOrder.toMap(),
       );
+      Future<void> deleteCartItem(String uid, CartOrdersModel cartOrder) async =>
+  await firestoreService.deleteData(
+    path: ApiPaths.cartItem(uid, cartOrder.id),
+  );
 }

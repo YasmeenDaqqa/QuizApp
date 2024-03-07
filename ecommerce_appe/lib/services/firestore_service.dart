@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:ecommerce_appe/models/product_item_model.dart';
 
 class FirestoreService {
   // Singleton
@@ -65,7 +66,9 @@ class FirestoreService {
     final snapshot = await reference.get();
     return builder(snapshot.data() as Map<String, dynamic>, snapshot.id);
   }
-
+Future<void> addToFavorites(String userId, ProductItemModel product) async {
+  await firestore.collection('users').doc(userId).collection('favorites').add(product.toMap());
+}
   // One Time Request for a list of documents
   Future<List<T>> getCollection<T>({
     required String path,

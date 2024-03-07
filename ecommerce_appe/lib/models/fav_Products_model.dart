@@ -43,4 +43,4 @@ class favModel {
   }
 }
 
-List<favModel> dummyCartOrders = [];
+List<favModel> fav = [];

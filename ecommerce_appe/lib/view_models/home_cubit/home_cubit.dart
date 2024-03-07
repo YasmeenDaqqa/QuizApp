@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ecommerce_appe/services/home_services.dart';
 import 'package:ecommerce_appe/services/auth_services.dart';
 import 'package:ecommerce_appe/models/fav_Products_model.dart';
+import 'package:ecommerce_appe/services/firestore_service.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
@@ -16,12 +17,23 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       final products = await homeServices.getProducts();
       final announcements = await homeServices.getAnnouncement();
+        
       emit(HomeLoaded(products, announcements));
     } catch (e) {
       emit(HomeError(e.toString()));
     }
   }
-    Future<void> addToCart(String productId) async {
+  void addToFavorites(ProductItemModel product) async {
+  emit(AddingToFavorites());
+  try {
+    final currentUser = await authServices.currentUser();
+    await FirestoreService.instance.addToFavorites(currentUser!.uid, product);
+    emit(AddedToFavorites());
+  } catch (e) {
+    emit(AddToFavoritesError(e.toString()));
+  }
+}
+   /* Future<void> addToCart(String productId) async {
     emit(AddingToFavorites());
     try {
       final product = await homeServices.getProduct(productId);
@@ -36,7 +48,7 @@ class HomeCubit extends Cubit<HomeState> {
     } catch (e) {
       emit(AddToFavoritesError(e.toString()));
     }
-  }
+  }*/
 
  
 }

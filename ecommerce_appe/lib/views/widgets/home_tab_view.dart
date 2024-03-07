@@ -29,6 +29,7 @@ class HomeTabView extends StatelessWidget {
           );
         } else if (state is HomeLoaded) {
           final products = state.products;
+         
           final announcements = state.announcements;
           return SingleChildScrollView(
           child: Padding(
@@ -73,6 +74,7 @@ class HomeTabView extends StatelessWidget {
                       ),
                       child: ProductItem(
                         productItem: products[index],
+                      
                       ),
                     );
                   },

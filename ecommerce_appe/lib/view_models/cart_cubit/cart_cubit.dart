@@ -1,6 +1,7 @@
 import 'package:ecommerce_appe/models/cart_orders_model.dart';
 import 'package:ecommerce_appe/services/auth_services.dart';
 import 'package:ecommerce_appe/services/cart_services.dart';
+import 'package:ecommerce_appe/models/product_item_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'cart_state.dart';
@@ -28,23 +29,23 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  // void removeFromCart(String productId) {
-  //   emit(CartLoading());
-  //   final index = dummyProducts.indexWhere((item) => item.id == productId);
-  //   dummyProducts[index] = dummyProducts[index].copyWith(
-  //     isAddedToCart: false,
-  //     quantity: 0,
-  //     size: null,
-  //   );
-  //   final cartItems =
-  //       dummyProducts.where((item) => item.isAddedToCart == true).toList();
-  //   final subTotal = cartItems.fold<double>(0, (sum, item) => sum + item.price);
-  //   Future.delayed(const Duration(seconds: 1), () {
-  //     emit(CartLoaded(
-  //       cartItems: cartItems,
-  //       subtotal: subTotal,
-  //     ));
-  //   });
+//   void removeFromCart(String productId) {
+ //   emit(CartLoading());
+ //   final index = dummyProducts.indexWhere((item) => item.id == productId);
+ //   dummyProducts[index] = dummyProducts[index].copyWith(
+  //    isAddedToCart: false,
+   //  quantity: 0,
+   //   size: null,
+ //  );
+ //   final cartItems =
+  ////      dummyProducts.where((item) => item.isAddedToCart == true).toList();
+   //// final subTotal = cartItems.fold<double>(0, (sum, item) => sum + item.price);
+   //  Future.delayed(const Duration(seconds: 1), () {
+    //   emit(CartLoaded(
+      ////  cartItems: cartItems,
+ ////       subtotal: subTotal,
+   //   ));
+    //});
   // }
 
   Future<void> incrementCounter(CartOrdersModel cartOrder) async {
@@ -86,4 +87,14 @@ class CartCubit extends Cubit<CartState> {
       emit(QuantityCounterError(message: e.toString()));
     }
   }
+  Future<void> deleteCartItem(CartOrdersModel cartOrder) async {
+  emit(CartLoading());
+  try {
+    final currentUser = await authServices.currentUser();
+    await cartServices.deleteCartItem(currentUser!.uid, cartOrder);
+    emit(CartDeleted(cartOrderId: cartOrder.id));
+  } catch (e) {
+    emit(CartError(message: e.toString()));
+  }
+}
 }

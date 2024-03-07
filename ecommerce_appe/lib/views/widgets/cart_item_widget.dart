@@ -57,9 +57,10 @@ class CartItemWidget extends StatelessWidget {
                         size: 30,
                       ),
                       color: AppColors.red,
-                      onPressed: () {},
-                      // onPressed: () =>
-                      //     cartCubit.removeFromCart(addToCartItem.id),
+                    //  onPressed: () {},
+                        onPressed: () => cartCubit.deleteCartItem(cartOrderItemOriginal),
+                    //   onPressed: () =>
+                    //    cartCubit.removeFromCart(addToCartItem.id),
                     ),
                   ),
                 ),

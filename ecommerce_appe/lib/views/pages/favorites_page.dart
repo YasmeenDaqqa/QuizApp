@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_appe/view_models/favorite_cubit/favorite_cubit.dart';
 import 'package:ecommerce_appe/models/product_item_model.dart';
 import 'package:ecommerce_appe/utils/route/app_routes.dart';
+import 'package:ecommerce_appe/models/fav_Products_model.dart';
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({super.key});
 
@@ -47,13 +48,13 @@ class FavoritesPage extends StatelessWidget {
                //   ).then((value) => setState(() {}));
                // },
                 leading: Image.network(
-                  favProducts[index].imgUrl,
+                 favProducts[index].imgUrl,
                   height: 100,
                   width: 70,
                   fit: BoxFit.fill,
                 ),
                 title: Text(
-                  favProducts[index].name,
+                 favProducts[index].name,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -75,7 +76,7 @@ class FavoritesPage extends StatelessWidget {
                 ) : TextButton.icon(
                 onPressed: () {
                //  setState(() {
-                    favProducts.remove(favProducts[index]);
+                   favProducts.remove(favProducts[index]);
               //  });
                 },
                  icon: const Icon(Icons.favorite),
