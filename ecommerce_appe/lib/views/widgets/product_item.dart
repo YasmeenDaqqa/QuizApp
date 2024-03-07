@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_appe/utils/app_colors.dart';
 import 'package:ecommerce_appe/models/fav_Products_model.dart';
 import 'package:ecommerce_appe/view_models/home_cubit/home_cubit.dart';
+import 'package:ecommerce_appe/view_models/favorite_cubit/favorite_cubit.dart';
+import 'package:ecommerce_appe/views/widgets/Favorite_Button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 class ProductItem extends  StatefulWidget {
    final ProductItemModel productItem;

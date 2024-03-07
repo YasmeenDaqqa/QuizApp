@@ -5,6 +5,7 @@ import 'package:ecommerce_appe/utils/route/app_routes.dart';
 import 'package:ecommerce_appe/view_models/home_cubit/home_cubit.dart';
 import 'package:ecommerce_appe/views/widgets/product_item.dart';
 import 'package:ecommerce_appe/views/widgets/custom_carousel_indicator.dart';
+import 'package:ecommerce_appe/view_models/favorite_cubit/favorite_cubit.dart';
 import 'package:flutter/material.dart';
 class HomeTabView extends StatelessWidget {
   const HomeTabView({super.key});

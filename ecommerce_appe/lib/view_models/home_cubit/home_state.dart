@@ -10,6 +10,7 @@ final class HomeLoading extends HomeState {}
 final class HomeLoaded extends HomeState {
   final List<ProductItemModel> products;
   final List<AnnouncementModel> announcements;
+    //final ProductItemModel product;
   HomeLoaded(this.products, this.announcements);
 }
 
