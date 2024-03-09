@@ -8,7 +8,7 @@ import 'package:ecommerce_appe/views/widgets/custom_carousel_indicator.dart';
 import 'package:ecommerce_appe/view_models/favorite_cubit/favorite_cubit.dart';
 import 'package:flutter/material.dart';
 class HomeTabView extends StatelessWidget {
-  const HomeTabView({super.key});
+  const HomeTabView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,60 +30,64 @@ class HomeTabView extends StatelessWidget {
           );
         } else if (state is HomeLoaded) {
           final products = state.products;
-         
           final announcements = state.announcements;
           return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 24.0),
-                CustomCarouselIndicator(announcements: announcements),
-                const SizedBox(height: 16.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'New Arrivals',
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('See More'),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16.0),
-                GridView.builder(
-                  itemCount: products.length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 25,
-                    crossAxisSpacing: 10,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 24.0),
+                  CustomCarouselIndicator(announcements: announcements),
+                  const SizedBox(height: 16.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'New Arrivals',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge!
+                            .copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text('See More'),
+                      ),
+                    ],
                   ),
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () =>
-                          Navigator.of(context, rootNavigator: true).pushNamed(
-                        AppRoutes.productDetails,
-                        arguments: products[index],
-                      ),
-                      child: ProductItem(
-                        productItem: products[index],
-                      
-                      ),
-                    );
-                  },
-                ),
-              ],
+                  const SizedBox(height: 16.0),
+                  GridView.builder(
+                    itemCount: products.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 25,
+                      crossAxisSpacing: 10,
+                    ),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () => Navigator.of(context, rootNavigator: true)
+                            .pushNamed(AppRoutes.productDetails,
+                                arguments: products[index]),
+                        child: ProductItem(
+                          productItem: products[index],
+                          onFavoritePressed: () {
+                            // Handle favorite button pressed
+                            cubit.addToFavorites(products[index]);
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
+          );
         } else {
           return const SizedBox();
         }

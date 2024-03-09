@@ -6,19 +6,24 @@ import 'package:ecommerce_appe/models/fav_Products_model.dart';
 import 'package:ecommerce_appe/view_models/home_cubit/home_cubit.dart';
 import 'package:ecommerce_appe/view_models/favorite_cubit/favorite_cubit.dart';
 import 'package:ecommerce_appe/views/widgets/Favorite_Button.dart';
+import 'package:ecommerce_appe/services/favorit_services.dart';
+import 'package:ecommerce_appe/view_models/product_cubit/product_cubit.dart';
+import 'package:ecommerce_appe/services/auth_services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-class ProductItem extends  StatefulWidget {
-   final ProductItemModel productItem;
-   
-  const ProductItem({
-    super.key,
-    required this.productItem,
+class ProductItem extends StatefulWidget {
+  final ProductItemModel productItem;
+  final VoidCallback onFavoritePressed;
 
-  });
+  const ProductItem({
+    Key? key,
+    required this.productItem,
+    required this.onFavoritePressed,
+  }) : super(key: key);
 
   @override
   State<ProductItem> createState() => _ProductItemState();
 }
+
 class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
@@ -52,29 +57,23 @@ class _ProductItemState extends State<ProductItem> {
               top: 8.0,
               right: 8.0,
               child: InkWell(
-              onTap: () {
-              //  setState(() {
-                //  if (favProducts.contains(widget.productItem)) {
-                ////    favProducts.remove(widget.productItem);
-                //  } else {
-                   // favProducts.add(widget.productItem);
-                  //}
-                //});
-                 BlocProvider.of<HomeCubit>(context).addToFavorites(widget.productItem);
-              },
-              child: DecoratedBox(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.white,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Icon(
-                    favProducts.contains(widget.productItem) ? Icons.favorite : Icons.favorite_border,
-                    color: Theme.of(context).primaryColor,
+                onTap: widget.onFavoritePressed,
+                child: DecoratedBox(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Icon(
+                      favProducts.contains(widget.productItem)
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   ),
                 ),
-              ),)
+              ),
             ),
           ],
         ),

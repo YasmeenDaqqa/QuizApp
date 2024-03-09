@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_appe/views/pages/profile_page.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:ecommerce_appe/view_models/cart_cubit/cart_cubit.dart';
+import 'package:ecommerce_appe/view_models/favorite_cubit/favorite_cubit.dart';
 import 'package:ecommerce_appe/views/pages/cart_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -44,7 +45,11 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
    List<Widget> _buildScreens() {
     return [
       const HomePage(),
-      const FavoritesPage(),
+      //const FavoritesPage(),
+      BlocProvider(
+  create: (context) => FavoriteCubit(),
+  child: FavoritesPage(),
+),
       BlocProvider(
         create: (context) {
           final cubit = CartCubit();

@@ -14,8 +14,61 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     final favoriteServices = FavoriteServicesImpl();
   final authServices = AuthServicesImpl();
   List<ProductItemModel> favoriteProducts = [];
+  
+  
+/*
+  void toggleFavorite(ProductItemModel product) async {
+    if (favoriteProducts.contains(product)) {
+      favoriteProducts.remove(product);
+      final currentUser = await AuthServicesImpl().currentUser();
+      if (currentUser != null) {
+      await favoriteServices.deleteFavoriteItem(currentUser.uid, product);
+      }
+    } else {
+      favoriteProducts.add(product);
+      final currentUser = await AuthServicesImpl().currentUser();
+      if (currentUser != null) {
+        await favoriteServices.addToFavorites(currentUser.uid, product);
+      }
+    }
+    emit(FavoriteLoaded(favoriteProducts));
+  }*/
+// Modify toggleFavorite method in FavoriteCubit to handle deletion from favorites
+void toggleFavorite(ProductItemModel product) async {
+  if (favoriteProducts.contains(product)) {
+    favoriteProducts.remove(product);
+    final currentUser = await AuthServicesImpl().currentUser();
+    if (currentUser != null) {
+      await favoriteServices.removeFromFavorites(currentUser.uid, product.id);
+    }
+  } else {
+    favoriteProducts.add(product);
+    final currentUser = await AuthServicesImpl().currentUser();
+    if (currentUser != null) {
+      await favoriteServices.addToFavorites(currentUser.uid, product);
+    }
+  }
+  emit(FavoriteLoaded(favoriteProducts));
+}
 
-  Future<void> deleteCartItem(ProductItemModel favorite) async {
+
+  void getFavoriteProducts() async {
+    emit(FavoriteLoading());
+    try {
+      final currentUser = await AuthServicesImpl().currentUser();
+      if (currentUser != null) {
+        final favProducts = await FirestoreService.instance.collectionStream<ProductItemModel>(
+          path: 'users/${currentUser.uid}/favorites',
+          builder: (data, documentId) => ProductItemModel.fromMap(data, documentId),
+        ).first;
+        favoriteProducts = favProducts;
+        emit(FavoriteLoaded(favoriteProducts));
+      }
+    } catch (e) {
+      emit(FavoriteError(message: e.toString()));
+    }}
+
+ /* Future<void> deleteCartItem(ProductItemModel favorite) async {
   emit(FavoriteLoading());
   try {
    
@@ -25,7 +78,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
   } catch (e) {
     emit(FavoriteError(message: e.toString()));
   }
-}
+}*/
   void addFavorite(ProductItemModel product) {
     favoriteProducts.add(product);
     emit(FavoriteLoaded(favoriteProducts));
@@ -47,7 +100,7 @@ class FavoriteCubit extends Cubit<FavoriteState> {
       emit(FavoriteError(message: e.toString()));
     }
   }
-  void toggleFavorite(ProductItemModel product) {
+  /*void toggleFavorite(ProductItemModel product) {
     if (favoriteProducts.contains(product)) {
       favoriteProducts.remove(product);
     } else {
@@ -55,10 +108,10 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     }
     emit(FavoriteLoaded(favProducts));
   }
-  
+  */
   final firestoreService = FirestoreService.instance;
 
-  void getFavoriteProducts() async {
+ /* void getFavoriteProducts() async {
     emit(FavoriteLoading());
     try {
       final currentUser = await AuthServicesImpl().currentUser();
@@ -71,5 +124,21 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     } catch (e) {
       emit(FavoriteError(message: e.toString()));
     }
+  }*/
+ 
+
+
+  Future<void> deleteFavorite(ProductItemModel product) async {
+    final currentUser = await AuthServicesImpl().currentUser();
+    if (currentUser != null) {
+      // Delete from Firebase
+      // Assuming you have a method in your FirestoreService to delete a favorite item
+      await favoriteServices.deleteFavoriteItem(currentUser.uid, product);
+    }
+    // Remove from local list
+    favoriteProducts.remove(product);
+    emit(FavoriteLoaded(favoriteProducts));
   }
+
+
 }
